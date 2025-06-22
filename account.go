@@ -75,8 +75,10 @@ func EventNew() {
 }
 
 func EventDraw() {
-	line_x := i32(90)
-	line_y := i32(40)
+	line_x := i32(90 * WindowSize.Y / 1080)
+	line_y := i32(40 * WindowSize.Y / 1080)
+	// fontSize := i32(24 * WindowSize.Y / 1080)
+	fontSize := i32(20)
 	col_x := line_x + 10*3
 	w := 2*line_x + 10*5
 	x := (i32(WindowSize.X) - w) / 2
@@ -86,17 +88,17 @@ func EventDraw() {
 		count -= 1
 	}
 	DrawRectangle(x, y, line_x+10*2, (count+1)*line_y+10*3-5, LightGray)
-	DrawText(Lang[Chance], x+10, y+10, 20, Black)
+	DrawText(Lang[Chance], x+10, y+10, fontSize, Black)
 	DrawRectangle(x+col_x, y, line_x+10*2, (count+1)*line_y+10*3-5, LightGray)
-	DrawText(Lang[Odd], x+10+col_x, y+10, 20, Black)
+	DrawText(Lang[Odd], x+10+col_x, y+10, fontSize, Black)
 	y += line_y + 10*2
 	for i := range count {
 		DrawRectangle(x+10, y, line_x, line_y-5, SkyBlue)
 		chance := fmt.Sprintf("%.2f", event[i].chance)
-		DrawText(chance, x+20, y+5, 20, Black)
+		DrawText(chance, x+20, y+5, fontSize, Black)
 		DrawRectangle(x+10+col_x, y, line_x, line_y-5, SkyBlue)
 		odd := fmt.Sprintf("%.2f", event[i].odd)
-		DrawText(odd, x+20+col_x, y+5, 20, Black)
+		DrawText(odd, x+20+col_x, y+5, fontSize, Black)
 		y += line_y
 	}
 }
@@ -145,10 +147,9 @@ func AccountDraw(account *Account) {
 	padding := NewVector2(20, 20)
 	text := Lang[Stake] + ": " + account.input
 	size := MeasureTextEx(GetFontDefault(), text, 20, 2)
-	color := NewColor(0, 0, 0, 127)
 	size_with_padding := Vector2Add(size, Vector2Scale(padding, 2))
 	position := Vector2Scale(Vector2Subtract(WindowSize, size_with_padding), 0.5)
-	DrawRectangleV(position, size_with_padding, color)
+	DrawRectangleV(position, size_with_padding, guiBg)
 	text_position := Vector2Add(position, padding)
 	DrawText(text, i32(text_position.X), i32(text_position.Y), 20, White)
 }

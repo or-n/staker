@@ -37,5 +37,5 @@ var (
 		Stake:   "stawka",
 		Balance: "bilans",
 	}
-	Lang = PL
+	Lang = EN
 )

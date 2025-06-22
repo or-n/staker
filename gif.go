@@ -2,8 +2,8 @@ package main
 
 import (
 	. "github.com/gen2brain/raylib-go/raylib"
-	"image/color"
-	"unsafe"
+	// "image/color"
+	// "unsafe"
 )
 
 var (
@@ -38,24 +38,24 @@ func GifUpdate() {
 		return
 	}
 	frameTimer += GetFrameTime()
-	data := unsafe.Slice((*byte)(gif.Data), frames*frameSize)
-	offset := frame * frameSize
-	frameBytes := data[offset : offset+frameSize]
-	colors := unsafe.Slice((*color.RGBA)(unsafe.Pointer(&frameBytes[0])), gif.Width*gif.Height)
-	UpdateTexture(GifTexture, colors)
-	if frameTimer >= 0.1 {
-		frameTimer = 0
-		frame++
-		if frame >= frames {
-			frame = 0
-			Gif = false
-		}
-	}
+	// data := unsafe.Slice((*byte)(gif.Data), frames*frameSize)
+	// offset := frame * frameSize
+	// frameBytes := data[offset : offset+frameSize]
+	// colors := unsafe.Slice((*color.RGBA)(unsafe.Pointer(&frameBytes[0])), gif.Width*gif.Height)
+	// UpdateTexture(GifTexture, colors)
+	// if frameTimer >= 0.1 {
+	// 	frameTimer = 0
+	// 	frame++
+	// 	if frame >= frames {
+	// 		frame = 0
+	// 		Gif = false
+	// 	}
+	// }
 }
 
 func GifDraw() {
 	if !Gif {
 		return
 	}
-	DrawTexture(GifTexture, GifX, GifY, White)
+	// DrawTexture(GifTexture, GifX, GifY, White)
 }
