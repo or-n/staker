@@ -1,30 +1,10 @@
 package main
 
 import (
-	"embed"
 	. "github.com/gen2brain/raylib-go/raylib"
-	"syscall/js"
 )
 
-func isTabFocused() bool {
-	document := js.Global().Get("document")
-	if !document.Truthy() {
-		return false
-	}
-	hasFocus := document.Call("hasFocus")
-	return hasFocus.Bool()
-}
-
-func viewportSize() (width, height int) {
-	window := js.Global().Get("window")
-	width = window.Get("innerWidth").Int()
-	height = window.Get("innerHeight").Int()
-	return
-}
-
 var (
-	//go:embed asset
-	ASSETS  embed.FS
 	BgMusic Music
 	update  = func() {
 		vw, vh := viewportSize()
@@ -50,8 +30,10 @@ var (
 		case StateOptions:
 			OptionsDraw()
 		}
-		DrawRectangle(0, 0, 130, 80, guiBg)
-		DrawFPS(30, 30)
+		if ShowFPS {
+			DrawRectangle(0, 0, 130, 80, guiBg)
+			DrawFPS(30, 30)
+		}
 		EndDrawing()
 	}
 )

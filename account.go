@@ -23,7 +23,8 @@ var (
 	AccountFile = "asset/account.gob"
 	MainAccount Account
 	event       []Possibility
-	n           = i32(5)
+	n           = i32(1)
+	next_n      = i32(1)
 	keyToChar   = map[int32]rune{
 		KeyZero:   '0',
 		KeyOne:    '1',
@@ -37,7 +38,9 @@ var (
 		KeyNine:   '9',
 		KeyPeriod: '.',
 	}
-	ShowOdd0 = false
+	ShowOdd0  = true
+	min_value = f32(0.7)
+	max_value = f32(1.1)
 )
 
 func AccountInit() {
@@ -55,6 +58,7 @@ func mix(a, b, t f64) f64 {
 }
 
 func EventNew() {
+	n = next_n
 	var sum f64
 	v := make([]f64, n)
 	for i := range n {
@@ -64,7 +68,7 @@ func EventNew() {
 	chance0 := rand.Float64()
 	sum /= 1 - chance0
 	event = make([]Possibility, n+1)
-	margin := mix(0.7, 1.1, rand.Float64())
+	margin := mix(f64(min_value), f64(max_value), rand.Float64())
 	x := margin / f64(n)
 	for i := range n {
 		p := v[i] / sum
