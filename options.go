@@ -23,7 +23,8 @@ func bool2string(x bool) string {
 func OptionsDraw() {
 	w := f32(400)
 	x := (WindowSize.X - w) * 0.5
-	rect := NewRectangle(x, 200, w, h)
+	y := (WindowSize.Y - h*6) * 0.5
+	rect := NewRectangle(x, y, w, h)
 	MusicVolume = slider(rect, Lang[Volume], MusicVolume, 0, 1)
 	rect.Y += spacing
 	labelFPS := fmt.Sprintf("show FPS: %s", bool2string(ShowFPS))

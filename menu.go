@@ -16,11 +16,16 @@ const (
 var (
 	SimulationState State
 	buttonSize      = NewVector2(200, 100)
+	mobile          = true
 )
 
 func MenuDraw() {
+	count := 3
+	if !mobile {
+		count += 1
+	}
 	x := (WindowSize.X - buttonSize.X) * 0.5
-	y := (WindowSize.Y - buttonSize.Y*4) * 0.5
+	y := (WindowSize.Y - buttonSize.Y*f32(count)) * 0.5
 	rect := NewRectangle(x, y, buttonSize.X, buttonSize.Y)
 	if clicked(rect, Lang[Play]) {
 		SimulationState = StateGame
@@ -37,8 +42,10 @@ func MenuDraw() {
 	if clicked(rect, Lang[Options]) {
 		SimulationState = StateOptions
 	}
-	rect.Y += buttonSize.Y
-	if clicked(rect, Lang[Exit]) {
-		SimulationState = StateExit
+	if !mobile {
+		rect.Y += buttonSize.Y
+		if clicked(rect, Lang[Exit]) {
+			SimulationState = StateExit
+		}
 	}
 }
