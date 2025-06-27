@@ -12,3 +12,7 @@ var (
 func MonitorSize() Vector2 {
 	return NewVector2(f32(GetMonitorWidth(0)), f32(GetMonitorHeight(0)))
 }
+
+func ScreenSize() Vector2 {
+	return NewVector2(f32(GetScreenWidth()), f32(GetScreenHeight()))
+}

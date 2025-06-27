@@ -8,6 +8,7 @@ var (
 	BgMusic Music
 	update  = func() {
 		vw, vh := viewportSize()
+		SetWindowSize(vw, vh)
 		WindowSize = NewVector2(float32(vw), float32(vh))
 		SetMusicVolume(BgMusic, MusicVolume)
 		if isTabFocused() {
@@ -40,7 +41,8 @@ var (
 
 func main() {
 	AddFileSystem(ASSETS)
-	InitWindow(1920, 1080, "Staker")
+	SetConfigFlags(FlagVsyncHint | FlagWindowResizable)
+	InitWindow(0, 0, "Staker")
 	InitAudioDevice()
 	BgMusic = LoadMusicStream("asset/TetrisThemeDubstep.ogg")
 	PlayMusicStream(BgMusic)
